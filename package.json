@@ -1,0 +1,24 @@
+{
+  "name": "budget-manager-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d . -b main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BeJloHukku/budget-manager-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BeJloHukku/budget-manager-frontend/issues"
+  },
+  "homepage": "https://github.com/BeJloHukku/budget-manager-frontend#readme",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
