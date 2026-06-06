@@ -227,7 +227,7 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 450px) {
   html {
     font-size: 14px;
   }
@@ -235,100 +235,189 @@
   .header__container,
   .main__container,
   .footer__container {
-    padding-left: var(--spacing-xs);
-    padding-right: var(--spacing-xs);
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
 
   .dashboard__card {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-md);
   }
 
   .dashboard__amount--large {
     font-size: var(--font-size-xl);
   }
 
+  /* Исправленный transaction card для 375-450px */
   .transaction-card {
     display: flex;
-    flex-direction: column;
-    position: relative;
-    padding: var(--spacing-sm);
-    padding-left: calc(var(--spacing-xl) + var(--spacing-sm));
-    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
   }
 
   .transaction-card__icon {
-    position: absolute;
-    left: var(--spacing-sm);
-    top: var(--spacing-sm);
-    transform: none;
-    width: var(--spacing-xl);
-    height: var(--spacing-xl);
+    flex-shrink: 0;
+    width: var(--spacing-lg);
+    height: var(--spacing-lg);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .transaction-card__content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xxs);
-    width: 100%;
+    flex: 2;
+    min-width: 120px;
   }
 
   .transaction-card__description {
     font-size: var(--font-size-sm);
     white-space: normal;
     word-break: break-word;
+    margin: 0 0 var(--spacing-xxs) 0;
   }
 
   .transaction-card__category {
     font-size: var(--font-size-xs);
+    display: inline-block;
   }
 
   .transaction-card__amount {
+    flex: 1;
+    text-align: right;
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-bold);
-    align-self: flex-start;
+    min-width: 80px;
   }
 
   .transaction-card__date {
     font-size: var(--font-size-xs);
     color: var(--color-text-light);
+    display: block;
+    margin-top: var(--spacing-xxs);
   }
 
   .transaction-card__actions {
     display: flex;
-    justify-content: flex-end;
     gap: var(--spacing-sm);
-    margin-top: var(--spacing-xs);
-    padding-top: var(--spacing-xs);
-    border-top: 1px solid var(--color-border-light);
+    margin-left: auto;
   }
 
   .transaction-card__actions button {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Форма транзакции */
+  .transaction-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
   }
 
   .transaction-form__type-toggle {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: var(--spacing-sm);
   }
 
+  .transaction-form__type-toggle button {
+    flex: 1;
+  }
+
+  .transaction-form__field {
+    width: 100%;
+  }
+
+  .transaction-form__input,
+  .transaction-form__select,
+  .transaction-form__textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .transaction-form__submit,
+  .transaction-form__cancel {
+    width: 100%;
+  }
+
+  /* Фильтры */
   .filters {
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
   }
 
   .filters__group {
     width: 100%;
   }
 
+  .filters__group select,
+  .filters__group input {
+    width: 100%;
+  }
+
   .filters__buttons {
+    display: flex;
     flex-direction: column;
+    gap: var(--spacing-sm);
     width: 100%;
   }
 
   .filters__button {
     width: 100%;
+  }
+
+  /* Статистика */
+  .statistics__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .category-stat {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* Дополнительно для узких экранов до 400px */
+@media (max-width: 400px) {
+  .transaction-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-card__icon {
+    position: absolute;
+    left: var(--spacing-md);
+    top: var(--spacing-md);
+  }
+
+  .transaction-card {
+    position: relative;
+    padding-left: calc(var(--spacing-lg) + var(--spacing-xl));
+  }
+
+  .transaction-card__content {
+    width: 100%;
+  }
+
+  .transaction-card__amount {
+    text-align: left;
+    width: 100%;
+  }
+
+  .transaction-card__actions {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: var(--spacing-xs);
+    padding-top: var(--spacing-xs);
+    border-top: 1px solid var(--color-border-light, #e5e7eb);
   }
 }
