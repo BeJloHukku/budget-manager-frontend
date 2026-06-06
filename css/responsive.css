@@ -248,38 +248,84 @@
   }
 
   .transaction-card {
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: var(--spacing-sm);
+    padding-left: calc(var(--spacing-xl) + var(--spacing-sm));
+    gap: var(--spacing-xs);
   }
 
   .transaction-card__icon {
-    grid-row: 1 / 3;
+    position: absolute;
+    left: var(--spacing-sm);
+    top: var(--spacing-sm);
+    transform: none;
+    width: var(--spacing-xl);
+    height: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .transaction-card__content {
-    grid-column: 2;
-    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxs);
+    width: 100%;
+  }
+
+  .transaction-card__description {
+    font-size: var(--font-size-sm);
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .transaction-card__category {
+    font-size: var(--font-size-xs);
   }
 
   .transaction-card__amount {
-    grid-column: 2;
-    grid-row: 2;
-    justify-self: start;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    align-self: flex-start;
+  }
+
+  .transaction-card__date {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-light);
   }
 
   .transaction-card__actions {
-    grid-column: 1 / -1;
-    grid-row: 3;
+    display: flex;
     justify-content: flex-end;
+    gap: var(--spacing-sm);
     margin-top: var(--spacing-xs);
+    padding-top: var(--spacing-xs);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .transaction-card__actions button {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
   }
 
   .transaction-form__type-toggle {
     grid-template-columns: 1fr;
   }
 
+  .filters {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .filters__group {
+    width: 100%;
+  }
+
   .filters__buttons {
     flex-direction: column;
+    width: 100%;
   }
 
   .filters__button {
