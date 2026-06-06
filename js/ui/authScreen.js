@@ -1,9 +1,3 @@
-/**
- * Auth Screen — управление экраном логина/регистрации.
- * Разметка лежит в index.html (#authScreen). Этот модуль только подключает
- * обработчики, переключает режим login/register и вызывает apiService.
- */
-
 import apiService from '../services/apiService.js';
 
 class AuthScreen {
