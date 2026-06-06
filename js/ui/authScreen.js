@@ -132,8 +132,8 @@ class AuthScreen {
                 this.showError('Пароли не совпадают');
                 return;
             }
-            if (password.length < 6) {
-                this.showError('Пароль должен быть минимум 6 символов');
+            if (password.length < 8) {
+                this.showError('Пароль должен быть минимум 8 символов');
                 return;
             }
         }
