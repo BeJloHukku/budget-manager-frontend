@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Веб-сервис управления личным бюджетом">
+  <title>Budget Manager - Управление бюджетом</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page">
+
+  <!-- Auth Screen (показывается, если пользователь не авторизован) -->
+  <section class="auth-screen" id="authScreen" hidden>
+    <div class="auth-screen__container">
+      <h1 class="auth-screen__title">Budget Manager</h1>
+      <p class="auth-screen__subtitle">Войдите или зарегистрируйтесь, чтобы продолжить</p>
+
+      <div class="auth-screen__tabs">
+        <button type="button"
+                class="auth-screen__tab auth-screen__tab--active"
+                data-auth-mode="login"
+                id="authTabLogin">
+          Вход
+        </button>
+        <button type="button"
+                class="auth-screen__tab"
+                data-auth-mode="register"
+                id="authTabRegister">
+          Регистрация
+        </button>
+      </div>
+
+      <form class="auth-screen__form" id="authForm" novalidate>
+        <div class="auth-screen__field">
+          <label class="auth-screen__label" for="authEmail">Email</label>
+          <input type="email"
+                 class="auth-screen__input"
+                 id="authEmail"
+                 name="email"
+                 placeholder="your@email.com"
+                 autocomplete="email"
+                 required>
+        </div>
+
+        <div class="auth-screen__field">
+          <label class="auth-screen__label" for="authPassword">Пароль</label>
+          <input type="password"
+                 class="auth-screen__input"
+                 id="authPassword"
+                 name="password"
+                 placeholder="••••••••"
+                 autocomplete="current-password"
+                 minlength="6"
+                 required>
+        </div>
+
+        <div class="auth-screen__field auth-screen__field--confirm" id="authPasswordConfirmField" hidden>
+          <label class="auth-screen__label" for="authPasswordConfirm">Подтвердите пароль</label>
+          <input type="password"
+                 class="auth-screen__input"
+                 id="authPasswordConfirm"
+                 name="passwordConfirm"
+                 placeholder="••••••••"
+                 autocomplete="new-password"
+                 minlength="6">
+        </div>
+
+        <div class="auth-screen__error" id="authError" hidden></div>
+
+        <button type="submit"
+                class="auth-screen__submit button button--primary"
+                id="authSubmit">
+          Войти
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- App Shell (показывается после авторизации) -->
+  <div class="app-shell" id="appShell" hidden>
+    <!-- Header -->
+    <header class="header">
+      <div class="header__container">
+        <h1 class="header__title">Budget Manager</h1>
+        <div class="header__meta">
+          <time class="header__date" id="currentDate"></time>
+          <button type="button" class="header__logout button button--secondary" id="logoutBtn">
+            Выйти
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="main__container">
+        
+        <!-- Dashboard -->
+        <section class="dashboard">
+          <div class="dashboard__card dashboard__card--balance">
+            <h2 class="dashboard__title">Баланс</h2>
+            <p class="dashboard__amount dashboard__amount--large" id="balanceAmount">0 ₽</p>
+          </div>
+          
+          <div class="dashboard__card dashboard__card--income">
+            <h2 class="dashboard__title">Доходы</h2>
+            <p class="dashboard__amount dashboard__amount--success" id="incomeAmount">0 ₽</p>
+          </div>
+          
+          <div class="dashboard__card dashboard__card--expense">
+            <h2 class="dashboard__title">Расходы</h2>
+            <p class="dashboard__amount dashboard__amount--danger" id="expenseAmount">0 ₽</p>
+          </div>
+        </section>
+
+        <!-- Transaction Form -->
+        <section class="transaction-form-section">
+          <h2 class="transaction-form-section__title">Добавить транзакцию</h2>
+          
+          <form class="transaction-form" id="transactionForm">
+            <!-- Type Toggle -->
+            <div class="transaction-form__type-toggle">
+              <button type="button" 
+                      class="transaction-form__type-button transaction-form__type-button--active"
+                      data-type="expense"
+                      id="expenseTypeBtn">
+                Расход
+              </button>
+              <button type="button" 
+                      class="transaction-form__type-button"
+                      data-type="income"
+                      id="incomeTypeBtn">
+                Доход
+              </button>
+            </div>
+
+            <!-- Amount Field -->
+            <div class="transaction-form__field">
+              <label class="transaction-form__label" for="amountInput">Сумма *</label>
+              <input type="number" 
+                     class="transaction-form__input"
+                     id="amountInput"
+                     name="amount"
+                     placeholder="0.00"
+                     step="0.01"
+                     min="0.01"
+                     required>
+              <span class="transaction-form__error" id="amountError"></span>
+            </div>
+
+            <!-- Category Field -->
+            <div class="transaction-form__field">
+              <label class="transaction-form__label" for="categorySelect">Категория *</label>
+              <select class="transaction-form__select" 
+                      id="categorySelect"
+                      name="category"
+                      required>
+                <option value="">Выберите категорию</option>
+              </select>
+              <span class="transaction-form__error" id="categoryError"></span>
+            </div>
+
+            <!-- Description Field -->
+            <div class="transaction-form__field">
+              <label class="transaction-form__label" for="descriptionInput">Описание *</label>
+              <textarea class="transaction-form__textarea"
+                        id="descriptionInput"
+                        name="description"
+                        placeholder="Например: Покупка продуктов"
+                        maxlength="200"
+                        rows="3"
+                        required></textarea>
+              <span class="transaction-form__error" id="descriptionError"></span>
+            </div>
+
+            <!-- Date Field -->
+            <div class="transaction-form__field">
+              <label class="transaction-form__label" for="dateInput">Дата *</label>
+              <input type="date" 
+                     class="transaction-form__input"
+                     id="dateInput"
+                     name="date"
+                     required>
+              <span class="transaction-form__error" id="dateError"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" 
+                    class="transaction-form__submit button button--primary"
+                    id="submitBtn">
+              Добавить транзакцию
+            </button>
+
+            <!-- Cancel Button (hidden by default, shown in edit mode) -->
+            <button type="button" 
+                    class="transaction-form__cancel button button--secondary"
+                    id="cancelBtn"
+                    style="display: none;">
+              Отмена
+            </button>
+          </form>
+        </section>
+
+        <!-- Filters -->
+        <section class="filters">
+          <div class="filters__group">
+            <h3 class="filters__title">Фильтр:</h3>
+            <div class="filters__buttons">
+              <button class="filters__button filters__button--active" 
+                      data-filter="all"
+                      id="filterAll">
+                Все
+              </button>
+              <button class="filters__button" 
+                      data-filter="income"
+                      id="filterIncome">
+                Доходы
+              </button>
+              <button class="filters__button" 
+                      data-filter="expense"
+                      id="filterExpense">
+                Расходы
+              </button>
+            </div>
+          </div>
+
+          <div class="filters__group">
+            <h3 class="filters__title">Сортировка:</h3>
+            <select class="filters__select" id="sortSelect">
+              <option value="date-desc">Сначала новые</option>
+              <option value="date-asc">Сначала старые</option>
+              <option value="amount-desc">Сумма: по убыванию</option>
+              <option value="amount-asc">Сумма: по возрастанию</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Transaction List -->
+        <section class="transaction-list-section">
+          <h2 class="transaction-list-section__title">История транзакций</h2>
+          <div class="transaction-list" id="transactionList">
+            <!-- Transactions will be rendered here -->
+            <div class="transaction-list__empty" id="emptyState">
+              <p class="transaction-list__empty-text">Нет транзакций</p>
+              <p class="transaction-list__empty-hint">Добавьте первую транзакцию, чтобы начать отслеживать свой бюджет</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Statistics -->
+        <section class="statistics">
+          <h2 class="statistics__title">Статистика по категориям</h2>
+          
+          <div class="statistics__toggle">
+            <button class="statistics__toggle-button statistics__toggle-button--active"
+                    data-stats-type="expense"
+                    id="statsExpenseBtn">
+              Расходы
+            </button>
+            <button class="statistics__toggle-button"
+                    data-stats-type="income"
+                    id="statsIncomeBtn">
+              Доходы
+            </button>
+          </div>
+
+          <div class="statistics__content" id="statisticsContent">
+            <!-- Statistics will be rendered here -->
+            <div class="statistics__empty">
+              <p class="statistics__empty-text">Нет данных для отображения</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__container">
+        <p class="footer__text">Budget Manager © 2026</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- JavaScript: только точка входа, остальное подтянется через ES-модули -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

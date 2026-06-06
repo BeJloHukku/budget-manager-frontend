@@ -1,0 +1,86 @@
+:root {
+  --color-primary: #000000;
+  --color-primary-dark: #1A1A1A;
+  --color-primary-light: #333333;
+  
+  --color-success: #2E7D32;
+  --color-success-dark: #1B5E20;
+  --color-success-light: #4CAF50;
+  
+  --color-danger: #C62828;
+  --color-danger-dark: #B71C1C;
+  --color-danger-light: #E53935;
+  
+  --color-warning: #F57C00;
+  --color-warning-dark: #E65100;
+  --color-warning-light: #FF9800;
+  
+  --color-info: #1976D2;
+  
+  --color-background: #FFFFFF;
+  --color-background-dark: #F5F5F5;
+  --color-card: #FFFFFF;
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  
+  --color-text: #000000;
+  --color-text-light: #424242;
+  --color-text-lighter: #757575;
+  --color-text-white: #FFFFFF;
+  
+  /* Цвета границ - черные */
+  --color-border: #000000;
+  --color-border-dark: #1A1A1A;
+  
+  /* Отступы */
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 1rem;      /* 16px */
+  --spacing-md: 1.5rem;    /* 24px */
+  --spacing-lg: 2rem;      /* 32px */
+  --spacing-xl: 3rem;      /* 48px */
+  --spacing-xxl: 4rem;     /* 64px */
+  
+  /* Размеры шрифтов */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-md: 1.125rem;  /* 18px */
+  --font-size-lg: 1.25rem;   /* 20px */
+  --font-size-xl: 1.5rem;    /* 24px */
+  --font-size-xxl: 2rem;     /* 32px */
+  --font-size-xxxl: 2.5rem;  /* 40px */
+  
+  /* Веса шрифтов */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Радиусы скругления */
+  --border-radius-sm: 4px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-round: 50%;
+  
+  /* Тени */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Переходы */
+  --transition-fast: all 0.15s ease;
+  --transition: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
+  
+  /* Ширина контейнера */
+  --container-max-width: 1200px;
+  --container-padding: var(--spacing-sm);
+  
+  /* Z-index слои */
+  --z-index-dropdown: 100;
+  --z-index-sticky: 200;
+  --z-index-modal: 1000;
+  --z-index-tooltip: 1100;
+}
