@@ -25,7 +25,7 @@ function formatApiError(payload, status, statusText) {
 
 class ApiService {
     constructor() {
-        this.baseUrl = `${API_BASE_URL}/api/v1`;
+        this.baseUrl = `${API_BASE_URL}`;
         this.rootUrl = API_BASE_URL;
     }
 
